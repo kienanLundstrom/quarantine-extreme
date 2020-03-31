@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import YouTube from 'react-youtube';
 
 
@@ -8,9 +7,10 @@ import YouTube from 'react-youtube';
 
 class ReactYoutube extends Component {
   
-  _onReady(event) {
+  VideoOnReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
+    console.log(event.target);
   }
   
   render(){
@@ -21,12 +21,14 @@ class ReactYoutube extends Component {
         autoplay: 1
       }
     };
- 
+    
+    const {videoId} = this.props
+
     return (
       <YouTube
-        videoId="2g811Eo7K8U"
+        videoId={videoId}
         opts={opts}
-        onReady={this._onReady}
+        onReady={this.VideoOnReady}
       />
     );
   }
