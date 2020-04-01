@@ -7,12 +7,15 @@ import YouTube from 'react-youtube';
 
 class ReactYoutube extends Component {
   
-  VideoOnReady(event) {
+  videoOnReady(event) {
     // access to player in all event handlers via event.target
-    event.target.pauseVideo();
+    event.target.playVideoAt();
     console.log(event.target);
   }
-  
+ 
+  newVideoButton(){
+    console.log('Ive been clicked');
+  }
   render(){
     const opts = {
       height: '390',
@@ -25,11 +28,15 @@ class ReactYoutube extends Component {
     const {videoId} = this.props
 
     return (
-      <YouTube
-        videoId={videoId}
-        opts={opts}
-        onReady={this.VideoOnReady}
-      />
+      <div>
+        <YouTube
+          videoId={videoId}
+          opts={opts}
+          onReady={this.videoOnReady}
+          onPlay={this.videoOnPlay}
+        />
+        <button onClick={this.newVideoButton}>Click me</button>
+      </div>
     );
   }
 }
