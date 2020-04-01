@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
+import Axios from 'axios';
 
-
-// https://youtu.be/_nBlN9yp9R8
-// https://www.youtube.com/watch?v=_nBlN9yp9R8
 
 class ReactYoutube extends Component {
+  state = {
+    video: [],
+  }
+
+  componentDidMount(){
+    this.getVideo();
+  }
   
+  getVideo = () => {
+    Axios({
+      method: 'GET',
+      url: '/video'
+    }).then((response) => {
+      console.log(response)
+    })
+  }
+
   videoOnReady(event) {
-    // access to player in all event handlers via event.target
     event.target.playVideoAt();
     console.log(event.target);
   }
