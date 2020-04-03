@@ -1,18 +1,17 @@
 const router = require('express').Router();
 const pool = require('../modules/pool');
 
-
-
-router.get('/', (req, res) => {
-    const queryText = 'SELECT * FROM "videos"';
-    pool.query(queryText)
-    .then((result) => {
+router.get(`/`, (req, res)=>{
+    const SQLquery = `SELECT * FROM videos ORDER BY random() LIMIT 1;`;
+    pool.query(SQLquery)
+    .then(result=>{
         res.send(result.rows);
-    }).catch((error) => {
-        res.sendStatus(500)
-        console.log('error in get all videos router', error)
     })
-}); 
+    .catch(error=>{
+        console.log('ERROR GETTING VIDEO ------------------->', error);
+        res.sendStatus(500);
+    });
+});
 
 
 
