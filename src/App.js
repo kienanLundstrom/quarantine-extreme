@@ -7,6 +7,7 @@ class App extends Component {
 
     state = {
         Video: [],
+        databaseId: [],
       }
     
       componentDidMount(){
@@ -14,17 +15,25 @@ class App extends Component {
       }
       
       getVideo = () => {
+        let firstId = this.state.databaseId;
         Axios({
           method: 'GET',
           url: '/video'
         }).then((response) => {
           console.log(response.data)
+          if (response.data[0].id === firstId ){
+            this.getVideo();
+          } else {
           this.setState({
-              Video:[response.data[0].youtubeID]
+              Video:[response.data[0].youtubeID],
+              databaseId: [response.data[0].id]
           })
           console.log(this.state.Video)
+          console.log(this.state.databaseId)
+          }
         })
       }
+    
       newVideoButton = () => {
         this.getVideo();
       }
