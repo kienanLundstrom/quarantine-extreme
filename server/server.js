@@ -8,7 +8,9 @@ const app = express();
 const video = require('./routes/videos.router');
 
 /** ---------- MIDDLEWARE ---------- **/
-app.use(bodyParser.json()); // needed for react requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+ // needed for react requests
 app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/

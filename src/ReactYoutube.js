@@ -6,7 +6,7 @@ import YouTube from 'react-youtube';
 class ReactYoutube extends Component {
 
   videoOnReady(event) {
-    event.target.playVideoAt();
+    event.target.playVideo();
   }
  
 

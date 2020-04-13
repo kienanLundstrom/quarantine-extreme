@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const pool = require('../modules/pool');
 
-router.get(`/`, (req, res)=>{
-    const SQLquery = `SELECT * FROM videos ORDER BY random() LIMIT 1;`;
+router.get(`/`, (req, res) => { 
+    const SQLquery = `SELECT "youtubeID" FROM videos;`;
     pool.query(SQLquery)
-    .then(result=>{
+    .then((result)=>{
         res.send(result.rows);
     })
-    .catch(error=>{
+    .catch((error)=>{
         console.log('ERROR GETTING VIDEO ------------------->', error);
         res.sendStatus(500);
     });

@@ -7,7 +7,7 @@ class App extends Component {
 
     state = {
         Video: [],
-        databaseId: [],
+        videoIndex: 0,
       }
     
       componentDidMount(){
@@ -15,33 +15,32 @@ class App extends Component {
       }
       
       getVideo = () => {
-        let firstId = this.state.databaseId;
         Axios({
           method: 'GET',
           url: '/video'
         }).then((response) => {
-          console.log(response.data)
-          if (response.data[0].id === firstId ){
-            this.getVideo();
-          } else {
           this.setState({
-              Video:[response.data[0].youtubeID],
-              databaseId: [response.data[0].id]
+              Video:[],
           })
-          console.log(this.state.Video)
-          console.log(this.state.databaseId)
-          }
+          response.data.forEach((vid)=>{
+              this.setState({
+                  Video: [...this.state.Video, vid]
+              })
+          })
         })
       }
-    
       newVideoButton = () => {
-        this.getVideo();
+        this.setState({
+            videoIndex: this.state.videoIndex + 1
+        })
+        console.log(this.state.videoIndex)
       }
       
     render(){
+        
         return(
             <div className='App'>
-                <ReactYoutube videoId={this.state.Video}/>
+                <ReactYoutube videoId={this.state.Video[this.state.videoIndex] && this.state.Video[this.state.videoIndex].youtubeID}/>
                 <button onClick={this.newVideoButton}>Click me</button>
             </div>
         )
