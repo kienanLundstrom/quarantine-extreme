@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
 import ReactYoutube from './ReactYoutube';
+import { Button } from '@material-ui/core';
 import Axios from 'axios';
+import { styled } from '@material-ui/core/styles';
+
+const MyButton = styled(Button)({
+  background: 'linear-gradient(to bottom right, yellow, red)',
+  border: 0,
+  borderRadius: 3,
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  color: 'black',
+  height: 48,
+  padding: '0 30px',
+  
+});
 
 class App extends Component { 
-
     state = {
         Video: [],
         videoIndex: 0,
@@ -33,18 +45,24 @@ class App extends Component {
         this.setState({
             videoIndex: this.state.videoIndex + 1
         })
+        if( this.state.videoIndex === 24 ){
+          this.setState({
+            videoIndex: 0
+          })
+        }
         console.log(this.state.videoIndex)
       }
       
     render(){
-        
         return(
             <div className='App'>
-                <ReactYoutube videoId={this.state.Video[this.state.videoIndex] && this.state.Video[this.state.videoIndex].youtubeID}/>
-                <button onClick={this.newVideoButton}>Click me</button>
+                  <div className='vidPlayer'>
+                    <ReactYoutube videoId={this.state.Video[this.state.videoIndex] &&
+                    this.state.Video[this.state.videoIndex].youtubeID}/>
+                  </div>
+                  <MyButton className='nextButton' onClick={this.newVideoButton}>New Video</MyButton>
             </div>
         )
     }
-}
-
+} 
 export default App;

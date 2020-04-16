@@ -12,8 +12,8 @@ class ReactYoutube extends Component {
 
   render(){
     const opts = {
-      height: '390',
-      width: '640',
+      height: '780',
+      width: '1280',
       playerVars: { // https://developers.google.com/youtube/player_parameters
         autoplay: 1
       }
