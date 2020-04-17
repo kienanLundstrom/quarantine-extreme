@@ -13,7 +13,7 @@ const MyButton = styled(Button)({
   color: 'black',
   height: 48,
   padding: '0 30px',
-  
+  marginRight: '25px',
 });
 
 class App extends Component { 
@@ -40,18 +40,31 @@ class App extends Component {
               })
           })
         })
-      }
-      newVideoButton = () => {
-        this.setState({
-            videoIndex: this.state.videoIndex + 1
-        })
-        if( this.state.videoIndex === 24 ){
-          this.setState({
-            videoIndex: 0
-          })
-        }
         console.log(this.state.videoIndex)
       }
+      newVideoButton = () => {
+          this.setState({
+            videoIndex: this.state.videoIndex + 1
+         }) 
+         if ( this.state.videoIndex > 23) {
+          this.setState({
+            videoIndex: 0
+          }) 
+         }
+        }
+      
+      prevVideoButton = () => {
+          this.setState({
+            videoIndex: this.state.videoIndex - 1
+          }) 
+          if (this.state.videoIndex < 0 ){
+            this.setState({
+              videoIndex: 23
+            }) 
+          }
+          console.log(this.state.videoIndex)
+        }
+ 
       
     render(){
         return(
@@ -60,7 +73,10 @@ class App extends Component {
                     <ReactYoutube videoId={this.state.Video[this.state.videoIndex] &&
                     this.state.Video[this.state.videoIndex].youtubeID}/>
                   </div>
-                  <MyButton className='nextButton' onClick={this.newVideoButton}>New Video</MyButton>
+                  <div className='buttonRow'>
+                  <MyButton  onClick={this.newVideoButton}>New Video</MyButton>
+                  <MyButton  onClick={this.prevVideoButton}>Prev Video</MyButton>
+                  </div>
             </div>
         )
     }
