@@ -74,8 +74,9 @@ class App extends Component {
                     this.state.Video[this.state.videoIndex].youtubeID}/>
                   </div>
                   <div className='buttonRow'>
-                  <MyButton  onClick={this.newVideoButton}>New Video</MyButton>
                   <MyButton  onClick={this.prevVideoButton}>Prev Video</MyButton>
+
+                  <MyButton  onClick={this.newVideoButton}>New Video</MyButton>
                   </div>
             </div>
         )
